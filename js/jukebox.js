@@ -1,8 +1,25 @@
 /*eslint-env browser*/
 
+// HELPER FUNCTION TO GET ELEMENT FROM THE DOM
+var $ = function (id) {
+	"use strict";
+	return window.document.getElementById(id);
+};
+
+//GLOBAL VARIABLES
+var albums = [["David Bowie", "Let's Dance"],
+			  ["The Prodigy", "Music For The Jilted Generation"],
+			  ["Marilyn Manson", "Mechanical Animals"],
+			  ["Madonna", "Confessions on a Dance Floor"],
+			  ["Unkle", "War Stories"]];
+
+var select = $('albums');
+var albumInstance, albumCollection = [];
+
+//CREATE A JUKEBOX CLASS
 var Jukebox = function () {
     "use strict";
-    var albums = [], self;
+    var self;
     
     self = {
         addAlbum: function (album) {
@@ -23,6 +40,7 @@ var Jukebox = function () {
     return self;
 };
 
+//CREATE AN ALBUM CLASS
 var Album = function (artist, title) {
     "use strict";
     var self = {
@@ -31,25 +49,52 @@ var Album = function (artist, title) {
             self.played += 1;
         },
         display: function () {
-            return artist + " : " + title + ". The album has been played " + this.played + " times.";
+            return artist + ' "' + title + '". The album has been played ' + this.played + ' times.';
         }
     };
     return self;
 };
 
+//CREATE JUKEBOX
 var jbox = new Jukebox();
-var album1 = new Album("Operation Ivy", "Energy");
-var album2 = new Album("Blink 182", "Dude Ranch");
-var album3 = new Album("New Found Glory", "Sticks and Stones");
 
-jbox.addAlbum(album1);
-jbox.addAlbum(album2);
-jbox.addAlbum(album3);
+//CREATE DROPDOWN MENU AND ALBUMS COLLECTION FROM ARRAY
+function createMenu() {
+	"use strict";
+	var option, i;
+	for (i in albums) {
+		option = document.createElement("option");
+		option.textContent = albums[i][0] + ' "' + albums[i][1] + '"';
+		option.value = i;
+		select.appendChild(option);
 
-album1.play();
-album1.play();
-album1.play();
-album2.play();
-album3.play();
+		//CREATE INSTANCES OF ALBUMS FROM ARRAY
+		albumInstance = new Album(albums[i][0], albums[i][1]);
+		jbox.addAlbum(albumInstance);
+		albumCollection.push(albumInstance);
+	}
+}
 
-window.console.log("You favorite album is: " + jbox.favoriteAlbum());
+function main() {
+	"use strict";
+	createMenu();
+	window.addEventListener("load", function () {
+
+		$('play').addEventListener("click", function () {
+			var optValue = select.value;
+			if (isNaN(optValue)) {
+				window.alert("Please select an album!");
+			} else {
+				window.console.log(albumCollection[optValue]);
+				albumCollection[optValue].play();
+			}
+		});
+
+		//DISPLAY FAVORITE ALBUM BASED ON PLAYS
+		$('show').addEventListener("click", function () {
+			$("favoriteAlbum").innerHTML = "You favorite album is: " + jbox.favoriteAlbum();
+		});
+	});
+}
+
+main();

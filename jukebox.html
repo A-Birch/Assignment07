@@ -3,13 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Assignment 7 - The Jukebox Application (30 Points)</title>
-    <script src="js/jukebox.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <script async src="js/jukebox.js"></script>
 </head>
 <body>
-    <h1>The Jukebox</h1>
-    <!-- ADD DROP DOWN MENU -->
-    <!-- ADD PLAY BUTTON -->
-    <!-- ADD SHOW FAVORITE ALBUM BUTTON -->
+	<h1>The Jukebox</h1>
+	<!-- ADD DROP DOWN MENU -->
+	<h3>Select what the album would you like to listen</h3>
+	<select id="albums">
+	<option>I want to listen...</option>
+	</select>
+	<!-- ADD PLAY BUTTON -->
+	<button value="Play" id="play"><i class="fas fa-play"></i> PLAY</button><br><br>
+	<!-- ADD SHOW FAVORITE ALBUM BUTTON -->
+	<input type="button" value="Show Favorite Album" id="show">
     <p id="favoriteAlbum"></p>
 </body>
 </html>
