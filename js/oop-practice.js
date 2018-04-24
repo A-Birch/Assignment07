@@ -59,8 +59,8 @@ window.console.log(myAnimal.displayMsg());
 */
 
 //STEP 5
+/* NOTE: STEP 5 AND STEP 6 ARE WORKING TOGETHER */
 
-/*
 //CREATE AN ANIMAL CLASS USING CONSTRUCTOR SYNTAX AND DEFINING FIVE PROPERTIES (TYPE, BREED, COLOR, HEIGHT, LENGTH)
 
 var Animal = function (type, breed, color, height, length_value) {
@@ -72,16 +72,17 @@ var Animal = function (type, breed, color, height, length_value) {
     this.length_value = length_value;
 }
 
+//PASS IN THE ACTUAL VALUES DURING THE OBJECT'S INSTANTIATION
+var myAnimal = new Animal("dog", "beagle", "red", "30cm", "50cm");
 
 //STEP 6
 
-//USE A FOR-IN LOOP THROUGH AND DISPLAY ALL OF THE PROPERTIES IN THE ANIMAL CLASS
+//USE A FOR-IN LOOP THROUGH AND DISPLAY ALL OF THE PROPERTIES AND THEIR VALUES IN THE ANIMAL CLASS
 
-var myAnimal = new Animal();
 for (var property in myAnimal) {
-    window.console.log(property);
+    window.console.log(property + " - " + myAnimal[property]);
 }
-*/
+
 
 //STEP 7
 
